@@ -4,6 +4,23 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
 
-  config.vm.define "vm1"
-  config.vm.define "vm2"
+  config.ssh.insert_key = false
+
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.vm.define "vm1" do |app|
+    app.vm.hostname = "vm1"
+  end
+  config.vm.define "vm2" do |app|
+    app.vm.hostname = "vm2"
+  end
+
+  config.vm.provision "common", type:'ansible' do |ansible|
+    ansible.playbook = "common.yml"
+  end
+
+  config.vm.provision "package-install", type:'ansible' do |ansible|
+    ansible.playbook = "package_install.yml"
+  end
 end
+ 

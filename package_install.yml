@@ -1,0 +1,6 @@
+---
+- name: Execute common tasks on all servers
+  hosts: all
+  become: true
+  roles:
+    - role: package-install

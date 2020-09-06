@@ -1,0 +1,15 @@
+---
+# tasks file for package-install
+# the below link details the installation of calico with a package manager
+# https://docs.projectcalico.org/getting-started/bare-metal/installation/binary-mgr
+
+- name: Add the Calico from repo PPA
+  apt_repository:
+    repo: ppa:project-calico/calico-3.16
+    state: present 
+    update_cache: yes
+
+- name: Install Calico
+  apt:
+    name: calico-felix
+    state: present
