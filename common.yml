@@ -1,6 +1,10 @@
 ---
+# This is the playbook that runs all common tasks across all three servers and
+# is called from the Vagrantfile as part of the privisioner. All further
+# configuration needs to be executed by running site.yml agains the inventory
+# file that vagrant generates, see the README file for details.
 - name: Execute common tasks on all servers
-  hosts: all
+  hosts: all_nodes
   become: true
   roles:
     - role: common
