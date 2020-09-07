@@ -1,6 +1,0 @@
----
-- name: Execute common tasks on all servers
-  hosts: calico_nodes
-  become: true
-  roles:
-    - role: package-install
