@@ -3,7 +3,7 @@
 #  import_playbook: common.yml
 
 - name: Execute package installation tasks on all nodes
-  import_playbook: calico_install.yml
+  import_playbook: etcd_install.yml
 
 - name: Execute package installation tasks on all nodes
-  import_playbook: etcd_install.yml
+  import_playbook: calico_install.yml
