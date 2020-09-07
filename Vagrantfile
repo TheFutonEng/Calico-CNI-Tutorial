@@ -14,13 +14,20 @@ Vagrant.configure("2") do |config|
   config.vm.define "vm2" do |app|
     app.vm.hostname = "vm2"
   end
-
-  config.vm.provision "common", type:'ansible' do |ansible|
-    ansible.playbook = "common.yml"
+  config.vm.define "etcd-node" do |app|
+    app.vm.hostname = "etcd-node"
   end
 
-  config.vm.provision "package-install", type:'ansible' do |ansible|
-    ansible.playbook = "package_install.yml"
-  end
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "site.yml"
+    ansible.groups ={}
+
+#  config.vm.provision "common", type:'ansible' do |ansible|
+#    ansible.playbook = "common.yml"
+#  end
+#
+#  config.vm.provision "package-install", type:'ansible' do |ansible|
+#    ansible.playbook = "package_install.yml"
+#  end
 end
  
