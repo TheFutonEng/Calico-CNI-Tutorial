@@ -10,5 +10,6 @@
 
 - name: Install packages
   apt:
-    name: ntp docker.io bridge-utils cgroupfs-mount containerd docker.io pigz runc ubuntu-fan
+    name: "{{ item }}"
     state: latest 
+  with_items: "{{ default_packages }}"
