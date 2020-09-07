@@ -1,2 +1,29 @@
 ---
 # tasks file for etcd-install
+
+- name: Pull etcd docker image
+  docker_image:
+    name: quay.io/coreos/etcd:v3.3.7
+
+- name: Run etcd docker image
+  docker_container:
+    name: etcd-v3.3.7 
+    state: started
+    network_mode: host
+    image: quay.io/coreos/etcd:v3.3.7
+    auto_remove: true
+    volumes:
+      - /tmp/etcd-data:/etcd-data
+    command: >
+      /usr/local/bin/etcd \
+      --data-dir /etcd-data \
+      --listen-client-urls http://0.0.0.0:2379 \
+      --advertise-client-urls http://${hostIP}:2379 \
+      --listen-peer-urls http://0.0.0.0:2380 \
+      --initial-advertise-peer-urls http://${hostIP}:2380 \
+      --initial-cluster default=http://${hostIP}:2380 \
+      --initial-cluster-token my-etcd-token \
+      --initial-cluster-state new \
+      --auto-compaction-retention 1
+  environment:
+    hostIP: '192.168.4.7'
