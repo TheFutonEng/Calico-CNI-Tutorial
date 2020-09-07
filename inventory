@@ -1,9 +1,16 @@
 # Put all VMs into a single group
-[vms]
-vm1
-vm2
+[calico_nodes]
+192.168.4.5
+192.168.4.6
 
-# Variables for the single group 
-[vms:vars]
+[etcd_nodes]
+192.168.4.7
+
+[all_nodes:children]
+calico_nodes
+etcd_nodes
+
+# Variables for the single group to use the vagrant user/private key
+[all_nodes:vars]
 ansible_user=vagrant
 ansible_private_key_file=~/.vagrant.d/insecure_private_key
