@@ -1,0 +1,6 @@
+---
+- name: Execute installation tasks on the Calico servers
+  hosts: calico_nodes
+  become: true
+  roles:
+    - role: calico-install
