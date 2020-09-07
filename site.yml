@@ -3,11 +3,7 @@
 #  import_playbook: common.yml
 
 - name: Execute package installation tasks on all nodes
-  import_playbook: package_install.yml
+  import_playbook: calico_install.yml
 
-#- name: Execute roles on all servers
-#  hosts: all
-#  become: yes
-#  roles:
-#    - common
-#    - package-install
+- name: Execute package installation tasks on all nodes
+  import_playbook: etcd_install.yml
