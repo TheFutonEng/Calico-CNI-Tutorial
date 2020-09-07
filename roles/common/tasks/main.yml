@@ -8,12 +8,7 @@
     update_cache: yes
     cache_valid_time: 7200
 
-- name: Install NTP
+- name: Install packages
   apt:
-    name: ntp 
+    name: ntp docker.io bridge-utils cgroupfs-mount containerd docker.io pigz runc ubuntu-fan
     state: latest 
-
-- name: Install docker
-  apt:
-    name: docker
-    state: latest
