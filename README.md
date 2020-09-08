@@ -18,7 +18,7 @@ See about inserting a table for this with links to the project site and installa
 
 TODO:Test with configurations to limit the amount of RAM Vagrant provides to each system to be 256MB.
 
-For those unfamiliar with Vagrant, it is a product from Hashhicorp which allows for VMs or containers to be spun up and subsequently provisioned.  The reason for listing Virtualbox above is that Vagrant by default (fact check this) uses Vitualbox as its hypervisor for spinning up resources.  
+For those unfamiliar with Vagrant, it is a product from Hashhicorp which allows for VMs or containers to be spun up and subsequently provisioned for the purposes of creating a lightweight and portable development environment.  The reason for listing Virtualbox above is that Vagrant by default uses Vitualbox as its hypervisor for spinning up resources.  
 
 # Topology
 TODO: Create a diagram of the VMs and docker containers that get launched
