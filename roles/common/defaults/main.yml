@@ -2,10 +2,13 @@
 # defaults file for common
 default_packages:
   - ntp 
-  - docker.io 
+  #- docker.io 
   - bridge-utils 
   - cgroupfs-mount 
   - containerd 
   - pigz 
   - runc 
   - ubuntu-fan
+
+pip_packages:
+  - docker

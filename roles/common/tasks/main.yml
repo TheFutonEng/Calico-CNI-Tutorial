@@ -12,3 +12,8 @@
   apt:
     name: "{{ default_packages }}"
     state: latest 
+
+- name: Install pip packages
+  pip:
+    name: "{{ pip_packages }}"
+    state: latest
