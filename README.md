@@ -8,13 +8,13 @@ The tools in the below table (hopefully a table) are what are required to be ins
 
 See about inserting a table for this with links to the project site and installation instructions for each.
 
-| Tool      | Version |
-| --------- |:-------:|
-| Vagrant   | 2.2.10  |
-| Ansible   | 2.9     |
-| Virtualbox| 6.1.12  |
-| Sufficient resource to run three VMs | N/A |
-| An Internet connetion | N/A |
+| Tool      | Tested Version | Install Instructions  |
+| --------- |:-------:|:---------------------:|
+| Vagrant   | 2.2.10  | [link](https://www.vagrantup.com/docs/installation) |
+| Ansible   | 2.9     | [link](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) |
+| Virtualbox| 6.1.12  | [link](https://www.virtualbox.org/manual/ch02.html) |
+| Sufficient resource to run three VMs | N/A | N/A |
+| An Internet connetion | N/A | N/A |
 
 TODO:Test with configurations to limit the amount of RAM Vagrant provides to each system to be 256MB.
 
