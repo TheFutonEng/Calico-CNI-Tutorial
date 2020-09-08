@@ -1,14 +1,22 @@
 ---
 # defaults file for common
+
+docker_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+
 default_packages:
   - ntp 
-  #- docker.io 
+  - docker-ce 
+  - containerd.io
   - bridge-utils 
-  - cgroupfs-mount 
-  - containerd 
+  - cgroupfs-mount  
   - pigz 
-  - runc 
   - ubuntu-fan
+  - python3-pip
 
 pip_packages:
   - docker

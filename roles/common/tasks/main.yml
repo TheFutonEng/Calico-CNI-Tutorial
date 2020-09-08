@@ -1,6 +1,22 @@
 ---
 # tasks file for common
 
+- name: Install dependencies required to install docker
+  apt:
+    name: "{{ docker_dependencies }}"
+    state: latest 
+    update_cache: yes
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
 - name: Update apt
   apt:
     name: "*"
@@ -12,6 +28,7 @@
   apt:
     name: "{{ default_packages }}"
     state: latest 
+    
 
 - name: Install pip packages
   pip:
