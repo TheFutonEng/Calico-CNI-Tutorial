@@ -1,23 +1,32 @@
 ---
-# tasks file for package-install
-# the below link details the installation of calico with a package manager
-# https://docs.projectcalico.org/getting-started/bare-metal/installation/binary-mgr
+# tasks file for calico-install
 
-- name: Add the Calico from repo PPA
-  apt_repository:
-    repo: ppa:project-calico/calico-3.16
-    state: present 
-    update_cache: yes
+- name: Pull calico-{{ calico_version }} docker image 
+  docker_image:
+    source: pull
+    name: "quay.io/coreos/calico/node:{{ calico_version }}"
 
-- name: Install Calico
-  apt:
-    name: calico-felix
-    state: present
-
-- name: Install etcd
-  apt:
-    name: etcd
-    state: present
+- name: Run calico-{{ calico_version }} docker image
+  docker_container:
+    name: "calico-{{ calico_version }}"
+    state: started
+    network_mode: host
+    privileged: yes
+    image: "quay.io/coreos/calico/node:{{ calico_version }}"
+    #auto_remove: true
+    volumes:
+      - /var/log/calico:/var/log/calico
+      - /run/docker/plugins:/run/docker/plugins
+      - /lib/modules:/lib/modules
+      - /var/run/calico:/var/run/calico
+      - /var/lib/calico:/var/lib/calico
+    env:
+      IP: "{{ hostvars[inventory_hostname]['ansible_enp0s8']['ipv4']['address'] }}"
+      CALICO_NETWORKING_BACKEND: "{{ calico_backend }}"
+      NO_DEFAULT_POOLS: "true"
+      CALICO_LIBNETWORK_ENABLED: "false"
+      ETCD_ENDPOINTS: "http://{{ etcd_ip }}:2379"
+      
 
 - name: Download calicoctl
   get_url:
