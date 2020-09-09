@@ -43,9 +43,18 @@
     owner: root
     group: root 
 
+- name: Make /etc/calico directory
+  file:
+    path: /etc/calico
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+
 - name: Copy calico.cfg file into place 
   template:
-    src: templates/calico.cfg.j2
+    src: templates/calicoctl.cfg.j2
     dest: /etc/calico/calicoctl.cfg
     mode: '0644'
     owner: root
