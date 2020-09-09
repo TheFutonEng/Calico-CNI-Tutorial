@@ -15,28 +15,13 @@
     #auto_remove: true
     volumes:
       - /tmp/etcd-data:/etcd-data
-    command: [
-      "/usr/local/bin/etcd ",
-      
-      ]
-    #command: >
-    #  /usr/local/bin/etcd 
-    #  --data-dir /etcd-data \
-    #  --listen-client-urls http://0.0.0.0:2379 \
-    #  --advertise-client-urls http://${hostIP}:2379 \
-    #  --listen-peer-urls http://0.0.0.0:2380 \
-    #  --initial-advertise-peer-urls http://${hostIP}:2380 \
-    #  --initial-cluster default=http://${hostIP}:2380 \
-    #  --initial-cluster-token my-etcd-token \
-    #  --initial-cluster-state new \
-    #  --auto-compaction-retention 1
+    command: "/usr/local/bin/etcd --data-dir /etcd-data --listen-client-urls http://0.0.0.0:2379 --advertise-client-urls http://{{ etcd_ip }}:2379 --listen-peer-urls http://0.0.0.0:2380 --initial-advertise-peer-urls http://{{ etcd_ip }}:2380 --initial-cluster default=http://{{ etcd_ip }}:2380 --initial-cluster-token my-etcd-token --initial-cluster-state new --auto-compaction-retention 1"
   environment:
-    hostIP: '192.168.4.7'
     ETCD_ENDPOINTS: 'http://192.168.4.7:2379'
 
-## The above command to start the container is erroring out:
+## The above command to start the container was erroring out when using YAML syntax to put the command on separate lines:
 # sudo docker logs 11c8177b9f3f
 # 2020-09-08 19:32:55.614903 E | etcdmain: error verifying flags, ' --data-dir' is not a valid flag. See 'etcd --help'.
 ##
-# pick this up with the below google search on the error
-# https://www.google.com/search?q=etcd+--data-dir+is+not+a+valid+flag&rlz=1C5CHFA_enUS864US864&oq=etcd+--data-dir+is+not+a+valid+flag&aqs=chrome..69i57.10701j0j7&sourceid=chrome&ie=UTF-8
+# It appears to be realted to this bug that doesn't have a fix yet
+# https://github.com/ansible/ansible/issues/24430
