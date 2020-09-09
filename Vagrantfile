@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "common.yml"
+    ansible.playbook = "site.yml"
     ansible.groups = {
       "calico_nodes" => ["vm1", "vm2"],
       "etcd_nodes" => ["etcd-node"],
