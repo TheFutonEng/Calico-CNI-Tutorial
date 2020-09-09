@@ -1,2 +1,4 @@
 ---
 # defaults file for package-install
+calico_version: release-v3.14
+calico_backend: bird
