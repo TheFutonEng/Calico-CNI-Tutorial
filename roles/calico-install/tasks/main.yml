@@ -4,7 +4,7 @@
 - name: Pull calico-{{ calico_version }} docker image 
   docker_image:
     source: pull
-    name: "quay.io/coreos/calico/node:{{ calico_version }}"
+    name: "quay.io/calico/node:{{ calico_version }}"
 
 - name: Run calico-{{ calico_version }} docker image
   docker_container:
@@ -12,7 +12,7 @@
     state: started
     network_mode: host
     privileged: yes
-    image: "quay.io/coreos/calico/node:{{ calico_version }}"
+    image: "quay.io/calico/node:{{ calico_version }}"
     #auto_remove: true
     volumes:
       - /var/log/calico:/var/log/calico
@@ -26,7 +26,7 @@
       NO_DEFAULT_POOLS: "true"
       CALICO_LIBNETWORK_ENABLED: "false"
       ETCD_ENDPOINTS: "http://{{ etcd_ip }}:2379"
-      
+
 
 - name: Download calicoctl
   get_url:
