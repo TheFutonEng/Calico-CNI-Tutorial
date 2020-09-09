@@ -34,3 +34,19 @@
   pip:
     name: "{{ pip_packages }}"
     state: latest
+
+- name: Download calicoctl
+  get_url:
+    url: https://github.com/projectcalico/calicoctl/releases/download/v3.16.1/calicoctl
+    dest: /usr/local/bin/
+    mode: '0755'
+    owner: root
+    group: root 
+
+- name: Copy calico.cfg file into place 
+  template:
+    src: templates/calico.cfg.j2
+    dest: /etc/calico/calicoctl.cfg
+    mode: '0644'
+    owner: root
+    group: root
