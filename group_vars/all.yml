@@ -1,0 +1,2 @@
+# Project wide variables
+etcd_ip: '192.168.4.7'
