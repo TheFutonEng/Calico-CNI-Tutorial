@@ -1,6 +1,6 @@
 ---
-#- name: Execute common tasks on all nodes
-#  import_playbook: common.yml
+- name: Execute common tasks on all nodes
+  import_playbook: common.yml
 
 - name: Execute etcd installation tasks on all etcd nodes
   import_playbook: etcd_install.yml
