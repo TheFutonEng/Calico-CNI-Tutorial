@@ -27,4 +27,24 @@
       CALICO_LIBNETWORK_ENABLED: "false"
       ETCD_ENDPOINTS: "http://{{ etcd_ip }}:2379"
 
+- name: Create calico binary location
+  file:
+    state: directory
+    path: /opt/cni/bin/
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Download the calico CNI plugin binary
+  get_url:
+    url: https://github.com/projectcalico/cni-plugin/releases/download/v3.14.0/calico-amd64
+    dest: /opt/cni/bin/calico
+    mode: '0755'
+  
+- name: Download the calico-ipam CNI plugin binary
+  get_url:
+    url: https://github.com/projectcalico/cni-plugin/releases/download/v3.14.0/calico-ipam-amd64
+    dest: /opt/cni/bin/calico-ipam
+    mode: '0755'
+
 
