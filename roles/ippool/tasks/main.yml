@@ -1,0 +1,22 @@
+---
+# tasks file for ippool
+
+- name: Copy the ippool template onto the etcd-node
+  template:
+    src: templates/ippool.yml.j2
+    dest: /tmp/ippool.yml
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Create the ippool
+  command: calicoctl create -f /tmp/ippool.yml
+  creates: /root/ippool_deployed
+  register: ippool_deploy
+
+- name: Touch the ippool_deployed file
+  file:
+    path: /root/ippool_deployed
+    state: touch
+    mode: '0644'
+  when: not ippool_deploy.failed

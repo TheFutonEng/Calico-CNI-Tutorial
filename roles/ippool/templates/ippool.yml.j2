@@ -1,0 +1,10 @@
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: my.ippool-1
+spec:
+  cidr: {{ ippool_cidr }}
+  ipipMode: Never
+  natOutgoing: true
+  disabled: false
+  blockSize: 26

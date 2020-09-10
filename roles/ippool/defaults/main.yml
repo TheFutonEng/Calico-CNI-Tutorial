@@ -1,0 +1,3 @@
+---
+# defaults file for ippool
+ippool_cidr: "10.1.0.0/16"
