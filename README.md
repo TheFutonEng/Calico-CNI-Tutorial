@@ -4,7 +4,7 @@
 The inspiration for this repo came from [this Medium post from Vikram Fugro](https://medium.com/@vikram.fugro/project-calico-the-cni-way-659d057566ce) on the subject of investigating Project Calico using Ubuntu servers.  This repo merely provides a means using Vagrant and Ansible to quickly get to the point where one can learn about Calico, CNI and the interaction between them.  It is not meant to be a deep dive into Vagrant or Ansible but some pointers will be highlighted if they're applicable to the flow of the project.
 
 # Required Tools 
-The tools in the below table (hopefully a table) are what are required to be installed on a laptop/computer in order to be able to use this repo.  Note, future editions of these tools may work just fine, these are the versions that were tested.
+The tools in the below table are what are required to be installed on a laptop/computer in order to be able to use this repo.  Note, future editions of these tools may work just fine, these are the versions that were tested.
 
 See about inserting a table for this with links to the project site and installation instructions for each.
 
