@@ -8,12 +8,12 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
-  config.vm.define "vm1" do |vm1|
-    vm1.vm.hostname = "vm1.test"
+  config.vm.define "calico1" do |vm1|
+    vm1.vm.hostname = "calico1.test"
     vm1.vm.network :private_network, ip: "192.168.4.5"
   end
-  config.vm.define "vm2" do |vm2|
-    vm2.vm.hostname = "vm2.test"
+  config.vm.define "calico2" do |vm2|
+    vm2.vm.hostname = "calico2.test"
     vm2.vm.network :private_network, ip: "192.168.4.6"
   end
   config.vm.define "etcd-node" do |en1|
@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "site.yml"
     ansible.groups = {
-      "calico_nodes" => ["vm1", "vm2"],
+      "calico_nodes" => ["calico1", "calico2"],
       "etcd_nodes" => ["etcd-node"],
       "all_nodes:children" => ["calico_nodes", "etcd_nodes"]
     }
