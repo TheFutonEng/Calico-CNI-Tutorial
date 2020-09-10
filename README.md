@@ -41,7 +41,7 @@ This command may take a few minutes to run but it does the following:
 * Stands up etcd docker container on the etcd node 
 * Stands up calico docker containers on the calico nodes which point to the etcd node for their datastore
 * Installs calicoctl on all three VMs  
-* Downloads and installed the calico and calico-ipam CNI reference plugins on the calico nodes
+* Downloads and installs the calico and calico-ipam CNI reference plugins on the calico nodes
 
 # Setup Verification
 
