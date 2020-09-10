@@ -29,7 +29,6 @@
     name: "{{ default_packages }}"
     state: latest 
     
-
 - name: Install pip packages
   pip:
     name: "{{ pip_packages }}"
@@ -50,7 +49,6 @@
     owner: root
     group: root
     mode: '0755'
-
 
 - name: Copy calico.cfg file into place 
   template:
