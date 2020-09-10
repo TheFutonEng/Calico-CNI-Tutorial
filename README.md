@@ -37,7 +37,7 @@ $ vagrant up
 
 This command may take a few minutes to run but it does the following:
 
-* Builds the three VMs defined in the Vagrantfile and detailed in the previous topology section.  
+* Builds the three VMs defined in the Vagrantfile and detailed in the previous topology section  
 * Stands up etcd docker container on the etcd node 
 * Stands up calico docker containers on the calico nodes which point to the etcd node for their datastore
 * Installs calicoctl on all three VMs  
