@@ -35,7 +35,13 @@ $ cd Calico-CNI-Tutorial
 $ vagrant up
 ```
 
-This command may take a few minutes to run.  It builds the three VMs defined in the Vagrantfile and detailed in the previous topology section.  Additionally, it stands up docker containers and installs calicoctl on all three.  An etcd container is provisioned on the etcd-node and likewise calico containers are provisioned on the calico nodes.  The calico containers get configured as part of the provisioning to point at the etcd container as a datastore.
+This command may take a few minutes to run but it does the following:
+
+* Builds the three VMs defined in the Vagrantfile and detailed in the previous topology section.  
+* Stands up etcd docker container on the etcd node 
+* Stands up calico docker containers on the calico nodes which point to the etcd node for their datastore
+* Installs calicoctl on all three VMs  
+* Downloads and installed the calico and calico-ipam CNI reference plugins on the calico nodes
 
 # Setup Verification
 
