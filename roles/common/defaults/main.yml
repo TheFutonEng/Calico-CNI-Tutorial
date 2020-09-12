@@ -17,6 +17,7 @@ default_packages:
   - pigz 
   - ubuntu-fan
   - python3-pip
+  - golang-go
 
 pip_packages:
   - docker
