@@ -1,0 +1,6 @@
+---
+- name: Execute installation tasks on the ETCD servers
+  hosts: etcd_nodes
+  become: true
+  roles:
+    - role: ippool

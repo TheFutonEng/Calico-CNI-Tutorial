@@ -5,13 +5,14 @@
   template:
     src: templates/ippool.yml.j2
     dest: /tmp/ippool.yml
-    mode: '0755'
     owner: root
     group: root
+    mode: '0755'
 
 - name: Create the ippool
-  command: calicoctl create -f /tmp/ippool.yml
-  creates: /root/ippool_deployed
+  command: 
+    cmd: calicoctl create -f /tmp/ippool.yml
+    creates: /root/ippool_deployed
   register: ippool_deploy
 
 - name: Touch the ippool_deployed file
