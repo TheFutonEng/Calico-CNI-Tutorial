@@ -17,7 +17,12 @@ default_packages:
   - pigz 
   - ubuntu-fan
   - python3-pip
-  - golang-go
+#  - golang-go
 
 pip_packages:
   - docker
+
+go_version: go1.14.1
+go_file_name: "{{ go_version }}.linux-amd64.tar.gz"
+go_download_location: "/tmp/{{ go_file_name }}"
+go_install_location: /usr/local/
