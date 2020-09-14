@@ -79,4 +79,4 @@
   lineinfile:
     path: /etc/profile
     regexp: '^export PATH=\$PATH:{{ go_install_location }}.*'
-    line: "export PATH=$PATH:{{ go_install_location }}/go/bin"
+    line: "export PATH=$PATH:{{ go_install_location }}go/bin"
