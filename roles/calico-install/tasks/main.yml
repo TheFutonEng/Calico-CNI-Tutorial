@@ -55,4 +55,5 @@
 - name: Run installer for network plugins
   command:
     cmd: /tmp/checkout/build_linux.sh
-    
+  environment:
+    PATH: '$PATH:{{ go_install_location }}go/bin'
