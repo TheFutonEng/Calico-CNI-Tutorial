@@ -53,7 +53,5 @@
     dest: /tmp/checkout
 
 - name: Run installer for network plugins
-  command:
+  shell:
     cmd: /tmp/checkout/build_linux.sh
-  environment:
-    PATH: '$PATH:{{ go_install_location }}go/bin'
