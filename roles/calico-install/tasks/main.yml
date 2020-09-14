@@ -47,23 +47,12 @@
     dest: /opt/cni/bin/calico-ipam
     mode: '0755'
 
-#- name: Download Golang installer
-#  get_url:
-#    url: https://storage.googleapis.com/golang/getgo/installer_linux
-#    dest: /tmp/installer_linux
-#    mode: '0755'
-#
-#- name: Run Golang installer 
-#  command: 
-#    cmd: /tmp/installer_linux 
-#    creates: /root/go_installed
-#  register: go_installation
-#
-#- name: Create /root/go_installed file 
-#  file:
-#    state: touch
-#    dest: /root/go_installed 
-#    owner: root
-#    group: root
-#    mode: '0664'
-#  when: not go_installation.failed
+- name: Clone network plugins repo 
+  git:
+    repo: https://github.com/containernetworking/plugins.git
+    dest: /tmp/checkout
+
+- name: Run installer for network plugins
+  command:
+    cmd: /tmp/checkout/build_linux.sh
+    
