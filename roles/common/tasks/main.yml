@@ -75,7 +75,7 @@
     group: root 
     mode: '0755'
 
-- name: Adjust systemwide path variable to include {{ go_install_location }}/go/bin
+- name: Adjust systemwide path variable to include {{ go_install_location }}go/bin
   lineinfile:
     path: /etc/profile
     regexp: '^export PATH=\$PATH:{{ go_install_location }}.*'
