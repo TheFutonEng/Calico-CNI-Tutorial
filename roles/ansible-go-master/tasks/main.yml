@@ -1,0 +1,34 @@
+---
+- name: Download the Go tarball
+  get_url:
+    url: "{{ go_download_location }}"
+    dest: /usr/local/src/{{ go_tarball }}
+    checksum: "{{ go_tarball_checksum }}"
+
+- name: Extract the Go tarball 
+  unarchive:
+    src: /usr/local/src/{{ go_tarball }}
+    dest: /usr/local
+    copy: no
+
+- name: Add the Go bin directory to the PATH environment variable for all users
+  copy:
+    src: go-bin.sh
+    dest: /etc/profile.d
+
+- name: Set GOPATH for all users
+  copy:
+    src: go-path.sh
+    dest: /etc/profile.d
+  when: set_go_path
+
+- name: Update /etc/environment so that the PATH variable contains {{ goroot }}
+  lineinfile:
+    dest: /etc/environment
+    state: present 
+    backrefs: yes
+    regexp: 'PATH=(["]*)((?!.*?{{ goroot }}).*?)(["]*)$'
+    line: 'PATH=\1\2:{{ goroot }}\3'
+
+- name: reboot!
+  reboot:

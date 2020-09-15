@@ -1,0 +1,6 @@
+---
+- name: Execute installation tasks for the Golang executables (required for cni network plugin install and cnitool install)
+  hosts: all_nodes
+  become: true
+  roles:
+    - role: ansible-go-master
