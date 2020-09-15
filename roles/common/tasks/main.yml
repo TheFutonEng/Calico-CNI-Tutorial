@@ -57,26 +57,3 @@
     mode: '0644'
     owner: root
     group: root
-
-- name: Download the golang installer
-  get_url:
-    url: https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz
-    dest: "{{ go_download_location }}"
-    owner: root
-    group: root
-    mode: '0755'
-
-- name: Extract golang archive to {{ go_install_location }}
-  unarchive:
-    remote_src: true
-    dest: "{{ go_install_location }}" 
-    src: "{{ go_download_location }}"
-    owner: root
-    group: root 
-    mode: '0755'
-
-- name: Adjust systemwide path variable to include {{ go_install_location }}go/bin
-  lineinfile:
-    path: /etc/profile
-    regexp: '^export PATH=\$PATH:{{ go_install_location }}.*'
-    line: "export PATH=$PATH:{{ go_install_location }}go/bin"
