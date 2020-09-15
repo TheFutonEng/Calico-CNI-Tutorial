@@ -53,5 +53,7 @@
     dest: /tmp/checkout
 
 - name: Run installer for network plugins
-  shell:
+  command:
     cmd: /tmp/checkout/build_linux.sh
+  environment: 
+    PATH: "{{ ansible_env.PATH }}:{{ goroot }}"
