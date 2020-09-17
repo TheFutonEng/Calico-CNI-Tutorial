@@ -1,10 +1,8 @@
 # Introduction
-The inspiration for this repo came from [this Medium post from Vikram Fugro](https://medium.com/@vikram.fugro/project-calico-the-cni-way-659d057566ce) on the subject of investigating Project Calico using Ubuntu servers.  It is highly recommended that this be read first before proceeding.  This repo merely provides a means using Vagrant and Ansible to quickly get to the point where one can learn about Calico, CNI and the interaction between them.  It is not meant to be a deep dive into Vagrant or Ansible but some pointers will be highlighted if they're applicable to the flow of the project.
+The inspiration for this repo came from [this Medium post from Vikram Fugro](https://medium.com/@vikram.fugro/project-calico-the-cni-way-659d057566ce) on the subject of investigating Project Calico using Ubuntu servers.  It is highly recommended that this be read first before proceeding.  This repo merely provides a means using Vagrant and Ansible to quickly get to the point where one can learn about Calico, CNI and the interaction between them.  It is not meant to be a deep dive into Vagrant or Ansible but some pointers may be highlighted if they're applicable to the flow of the project.
 
 # Required Tools 
 The tools in the below table are what are required to be installed on a laptop/computer in order to be able to use this repo.  Note, future editions of these tools may work just fine, these are the versions that were tested.
-
-See about inserting a table for this with links to the project site and installation instructions for each.
 
 | Tool      | Tested Version | Install Instructions  |
 | --------- |:-------:|:---------------------:|
@@ -92,3 +90,10 @@ From this point, feel free to explore however you wish.  This repo will continue
 
 ## IPPool
 
+An IP Pool is a Calico resource type which represents an IP range from which Calico can assign individual addresses to endpoints.  In order to create a pool, run the following command from your localhost machine:
+
+```bash
+$ ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ippool.yml 
+```
+
+The above command will deploy the ippool defined in ```Calico-CNI-Tutorial/roles/ippool/templates/ippool.yml.j2```.  
