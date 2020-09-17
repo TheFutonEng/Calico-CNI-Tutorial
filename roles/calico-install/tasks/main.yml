@@ -66,6 +66,7 @@
 # note, go cannot use absolute paths - https://stackoverflow.com/questions/37218930/why-cant-go-build-from-absolute-path    
 - name: Go Install CNI
   command:
-    cmd: "cd {{ clone_location}}/containernetworking/cnitool/ ; go install ."
+    cmd: go install .
+    chdir:  "{{ clone_location}}/containernetworking/cnitool/"
   environment: 
     PATH: "{{ ansible_env.PATH }}:{{ goroot }}"
