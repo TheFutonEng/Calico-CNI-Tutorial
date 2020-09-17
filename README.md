@@ -14,7 +14,7 @@ The tools in the below table are what are required to be installed on a laptop/c
 
 TODO:Test with configurations to limit the amount of RAM Vagrant provides to each system to be 256MB.
 
-For those unfamiliar with Vagrant, it is a product from Hashhicorp which allows for VMs or containers to be spun up and subsequently provisioned for the purposes of creating a lightweight and portable development environment.  The reason for listing Virtualbox above is that Vagrant by default uses Vitualbox as its hypervisor for spinning up resources.  
+For those unfamiliar with Vagrant, it is a product from Hashhicorp which allows for VMs or containers to be spun up and subsequently provisioned for the purposes of creating a lightweight and portable development environment.  The reason for listing Virtualbox above is that Vagrant by default uses Vitualbox as its hypervisor for spinning up resources.  Other tools can be used for this purpose but this repo was developed for Virtualbox.
 
 # Topology
 TODO: Create a diagram of the VMs and docker containers that get launched
@@ -36,7 +36,7 @@ $ vagrant up
 This command may take a few minutes to run but it does the following:
 
 * Builds the three VMs defined in the Vagrantfile and detailed in the previous topology section  
-* Stands up etcd docker container on the etcd node 
+* Stands up an etcd docker container on the etcd node 
 * Stands up calico docker containers on the calico nodes which point to the etcd node for their datastore
 * Installs calicoctl on all three VMs  
 * Downloads and installs the calico and calico-ipam CNI reference plugins on the calico nodes
@@ -90,10 +90,34 @@ From this point, feel free to explore however you wish.  This repo will continue
 
 ## IPPool
 
-An IP Pool is a Calico resource type which represents an IP range from which Calico can assign individual addresses to endpoints.  In order to create a pool, run the following command from your localhost machine:
+An IP Pool is a Calico resource type which represents an IP range from which Calico can assign individual addresses to endpoints.  In order to create a pool, run the following command from your localhost machine in the root directory of the repo (Calico-CNI-Tutorial/)
 
 ```bash
 $ ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ippool.yml 
 ```
 
-The above command will deploy the ippool defined in ```Calico-CNI-Tutorial/roles/ippool/templates/ippool.yml.j2```.  
+The above command will deploy the ippool defined in: 
+
+```Calico-CNI-Tutorial/roles/ippool/templates/ippool.yml.j2```
+
+The equivalent command that can be run from the CLI of the etcd-node is below for reference:
+
+```bash 
+$ calicoctl create -f ippool.yml
+```
+
+Note, the above command assumes that ippool.yml exists.  A sample YAML file is below for reference (copied from the Medium post referenced in the introduction):
+
+```yaml
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: my.ippool-1
+spec:
+  cidr: 10.1.0.0/16
+  ipipMode: Never
+  natOutgoing: true
+  disabled: false
+  blockSize: 26
+```
+
