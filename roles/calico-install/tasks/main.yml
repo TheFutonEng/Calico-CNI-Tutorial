@@ -8,7 +8,7 @@
 
 - name: Run calico-{{ calico_version }} docker image
   docker_container:
-    name: "calico-{{ calico_version }}"
+    name: "{{ calico_container_name }}"
     state: started
     network_mode: host
     privileged: yes
