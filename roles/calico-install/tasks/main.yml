@@ -50,10 +50,22 @@
 - name: Clone network plugins repo 
   git:
     repo: https://github.com/containernetworking/plugins.git
-    dest: /tmp/checkout
+    dest: "{{ clone_location }}/plugins"
 
 - name: Run installer for network plugins
   command:
-    cmd: /tmp/checkout/build_linux.sh
+    cmd: "{{ clone_location }}/plugins/build_linux.sh"
+  environment: 
+    PATH: "{{ ansible_env.PATH }}:{{ goroot }}"
+
+- name: Clone CNI repo 
+  git:
+    repo: https://github.com/containernetworking/cni.git
+    dest: "{{ clone_location }}/containernetworking/"
+    
+# note, go cannot use absolute paths - https://stackoverflow.com/questions/37218930/why-cant-go-build-from-absolute-path    
+- name: Go Install CNI
+  command:
+    cmd: "cd {{ clone_location}}/containernetworking/cnitool/ ; go install ."
   environment: 
     PATH: "{{ ansible_env.PATH }}:{{ goroot }}"
