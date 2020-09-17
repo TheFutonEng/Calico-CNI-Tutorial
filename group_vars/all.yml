@@ -4,3 +4,5 @@ etcd_endpoint: "http://{{ etcd_ip }}:2379"
 cni_version: "0.4.0"
 go_install_location: /usr/local/
 goroot: /usr/local/go/bin
+calico_version: release-v3.14
+calico_container_name: calico-{{ calico_version }}
