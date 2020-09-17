@@ -30,5 +30,5 @@
     regexp: 'PATH=(["]*)((?!.*?{{ goroot }}).*?)(["]*)$'
     line: 'PATH=\1\2:{{ goroot }}\3'
 
-- name: reboot!
-  reboot:
+#- name: reboot!
+#  reboot:
