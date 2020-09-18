@@ -42,7 +42,7 @@ This command may take a few minutes to run but it does the following:
 * Downloads and installs the calico and calico-ipam CNI reference plugins on the calico nodes
 * Downloads and installs Golang on the calico nodes (role to perform this copied from @jlund [here](https://github.com/jlund/ansible-go))
 * Downloads and installs the CNI network plugins on the calico nodes
-* Downloads and install the cnitool on the calico nodes
+* Downloads and install the cnitool on the calico nodes (install locaiton is /home/vagrant/go/bin/cnitool)
 
 # Setup Verification
 
@@ -96,7 +96,7 @@ An IP Pool is a Calico resource type which represents an IP range from which Cal
 $ ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ippool.yml 
 ```
 
-The above command will deploy the ippool defined in: 
+This command will deploy the ippool defined in: 
 
 ```Calico-CNI-Tutorial/roles/ippool/templates/ippool.yml.j2```
 
@@ -106,7 +106,7 @@ The equivalent command that can be run from the CLI of the etcd-node is below fo
 $ calicoctl create -f ippool.yml
 ```
 
-Note, the above command assumes that ippool.yml exists.  A sample YAML file is below for reference (copied from the Medium post referenced in the introduction):
+Note, the above command assumes that ippool.yml exists on the etcd-node.  A sample YAML file is below for reference (copied from the Medium post referenced in the introduction):
 
 ```yaml
 apiVersion: projectcalico.org/v3
@@ -120,4 +120,3 @@ spec:
   disabled: false
   blockSize: 26
 ```
-
