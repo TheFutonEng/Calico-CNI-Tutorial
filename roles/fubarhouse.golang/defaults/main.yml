@@ -1,0 +1,23 @@
+---
+# defaults file for fubarhouse-golang
+
+# Go
+go_reget: false
+go_install_clean: false
+go_version: 1.14.9
+go_uninstall: false
+go_custom_mirror: https://storage.googleapis.com/golang
+go_temporary_dir: /tmp
+mode_codebase: 0755
+mode_workspace: 0755
+
+build_go_from_source: false
+install_go_bootstrap: true
+go_build_script: make.bash
+
+
+# Go get
+go_get: []
+go_install: []
+
+GOROOT_BOOTSTRAP: /home/vagrant/go1.14

@@ -1,0 +1,20 @@
+---
+
+- name: "Go-Lang | Install dependencies"
+  dnf:
+    name: [ 'curl', 'gcc', 'git', 'findutils', 'make', 'rsync', 'tar' ]
+    state: present
+  register: redhat_result
+  until: redhat_result is success
+  retries: 1
+  delay: 2
+
+- name: "Go-Lang | Define GOARCH"
+  set_fact:
+    GOARCH: "amd64"
+  when: GOARCH is not defined
+
+- name: "Go-Lang | Define GOOS"
+  set_fact:
+    GOOS: "linux"
+  when: GOOS is not defined

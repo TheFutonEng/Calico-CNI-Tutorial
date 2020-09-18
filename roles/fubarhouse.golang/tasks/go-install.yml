@@ -1,0 +1,34 @@
+---
+
+- name: "Go-Lang | Clone packages"
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ GOPATH }}/src/{{ item.dest }}"
+    version: "{{ item.version }}"
+    clone: yes
+    update: yes
+    force: yes
+  with_items: "{{ go_install }}"
+  changed_when: false
+
+- name: "Go-Lang | Install vendors"
+  command: "{{ GOROOT }}/bin/go mod vendor"
+  environment:
+    GOROOT: "{{ GOROOT }}"
+    GOPATH: "{{ GOPATH }}"
+    GOPROXY: "{{ GOPROXY }}"
+    GO111MODULE: "{{ GO111MODULE }}"
+  args:
+    chdir: "{{ GOPATH }}/src/{{ item.dest }}"
+  with_items: "{{ go_install }}"
+  changed_when: false
+
+- name: "Go-Lang | Install packages"
+  command: "{{ GOROOT }}/bin/go install {{ item.package }}/..."
+  environment:
+    GOROOT: "{{ GOROOT }}"
+    GOPATH: "{{ GOPATH }}"
+    GOPROXY: "{{ GOPROXY }}"
+    GO111MODULE: "{{ GO111MODULE }}"
+  with_items: "{{ go_install }}"
+  changed_when: false
