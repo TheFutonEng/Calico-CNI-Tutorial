@@ -22,13 +22,10 @@
     dest: /etc/profile.d
   when: set_go_path
 
-- name: Update /etc/environment so that the PATH variable contains {{ goroot }}
+- name: Update /etc/environment so that the PATH variable contains {{ GOROOT }}
   lineinfile:
     dest: /etc/environment
     state: present 
     backrefs: yes
-    regexp: 'PATH=(["]*)((?!.*?{{ goroot }}).*?)(["]*)$'
-    line: 'PATH=\1\2:{{ goroot }}\3'
-
-#- name: reboot!
-#  reboot:
+    regexp: 'PATH=(["]*)((?!.*?{{ GOROOT }}).*?)(["]*)$'
+    line: 'PATH=\1\2:{{ GOROOT }}\3'
