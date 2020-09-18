@@ -17,7 +17,7 @@ default_packages:
   - pigz 
   - ubuntu-fan
   - python3-pip
-#  - golang-go
+  - jq
 
 pip_packages:
   - docker
