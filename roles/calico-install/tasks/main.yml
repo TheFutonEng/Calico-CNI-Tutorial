@@ -47,6 +47,25 @@
     dest: /opt/cni/bin/calico-ipam
     mode: '0755'
 
+- name: Clone CNI repo 
+  git:
+    repo: https://github.com/containernetworking/cni.git
+    dest: "{{ clone_location }}/containernetworking/"
+    
+# note, go cannot use absolute paths - https://stackoverflow.com/questions/37218930/why-cant-go-build-from-absolute-path    
+- name: Go Install CNI
+  shell: go install .
+  args:
+    chdir:  "{{ clone_location }}/containernetworking/cnitool/"
+  environment: 
+    PATH: "{{ ansible_env.PATH }}:{{ GOROOT }}"
+  register: go_installation
+  # if this still doesn't work, this repo may be worth looking at more closely - https://github.com/fubarhouse/ansible-role-golang
+
+- debug:
+    var: go_installation
+    verbosity: 2
+
 - name: Clone network plugins repo 
   git:
     repo: https://github.com/containernetworking/plugins.git
@@ -56,17 +75,8 @@
   command:
     cmd: "{{ clone_location }}/plugins/build_linux.sh"
   environment: 
-    PATH: "{{ ansible_env.PATH }}:{{ goroot }}"
+    PATH: "{{ ansible_env.PATH }}:{{ GOROOT }}"
+  register: plugin_install
 
-- name: Clone CNI repo 
-  git:
-    repo: https://github.com/containernetworking/cni.git
-    dest: "{{ clone_location }}/containernetworking/"
-    
-# note, go cannot use absolute paths - https://stackoverflow.com/questions/37218930/why-cant-go-build-from-absolute-path    
-- name: Go Install CNI
-  command:
-    cmd: go install .
-    chdir:  "{{ clone_location}}/containernetworking/cnitool/"
-  environment: 
-    PATH: "{{ ansible_env.PATH }}:{{ goroot }}"
+- debug:
+    var: plugin_install
