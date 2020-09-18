@@ -3,6 +3,12 @@ etcd_ip: '192.168.4.7'
 etcd_endpoint: "http://{{ etcd_ip }}:2379"
 cni_version: "0.4.0"
 go_install_location: /usr/local/
-goroot: /usr/local/go/bin
+#GOROOT: /usr/local/go/bin
+#GOPATH: /home/vagrant/go
 calico_version: release-v3.14
 calico_container_name: calico-{{ calico_version }}
+
+# Copying in the variables from fubarhouse
+GOPATH: /home/vagrant/go
+GOROOT: /usr/local/go
+GOPROXY: https://proxy.golang.org
