@@ -12,12 +12,16 @@ mode_codebase: 0755
 mode_workspace: 0755
 
 build_go_from_source: false
-install_go_bootstrap: true
+install_go_bootstrap: false
 go_build_script: make.bash
 
 
 # Go get
 go_get: []
 go_install: []
+#  - repo: https://github.com/containernetworking/cni.git
+#    dest: github.com/containernetworking/cni/cnitool
+#    version: v0.7.1
+#    package: github.com/containernetworking/cni/cnitool
 
 GOROOT_BOOTSTRAP: /home/vagrant/go1.14
