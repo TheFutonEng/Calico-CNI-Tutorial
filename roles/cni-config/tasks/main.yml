@@ -11,7 +11,7 @@
 
 - name: Copy CNI configuration onto calico nodes
   template:
-    src: templates/10-calico.conflist.j2
+    src: templates/05-calico.conflist.j2
     dest: /etc/cni/net.d/10-calico.conflist
     owner: root
     group: root
