@@ -40,7 +40,7 @@ This command may take a few minutes to run but it does the following:
 * Stands up calico docker containers on the calico nodes which point to the etcd node for their datastore
 * Installs calicoctl on all three VMs  
 * Downloads and installs the calico and calico-ipam CNI reference plugins on the calico nodes
-* Downloads and installs Golang on the calico nodes (role to perform this copied from @jlund [here](https://github.com/jlund/ansible-go))
+* Downloads and installs Golang on the calico nodes (role to perform this copied from fubarhouse [here](https://github.com/fubarhouse/ansible-role-golang))
 * Downloads and installs the CNI network plugins on the calico nodes
 * Downloads and install the cnitool on the calico nodes (install locaiton is /home/vagrant/go/bin/cnitool)
 
@@ -120,3 +120,11 @@ spec:
   disabled: false
   blockSize: 26
 ```
+
+# Calico Configuration
+
+This section covers getting the network plumbing in place for the calico containers.  Note, Calico only supports CNI spec versions 0.1.0, 0.2.0, 0.3.0 and 0.3.1.
+
+# Additional Resources
+
+* [Kubernetes and the CNI](https://www.caseyc.net/cni-talk-kubecon-18.pdf)
