@@ -10,3 +10,6 @@
 
 - name: Execute calico installation tasks on calico nodes
   import_playbook: calico_install.yml
+
+- name: Execute CNI configuration file tasks on calico nodes
+  import_playbook: cni_config.yml
