@@ -1,0 +1,9 @@
+{
+    "name": "test-calico",
+    "cniVersion": {{ cni_version }},
+    "type": "calico",
+    "ipam": {
+        "type": "calico-ipam"
+    },
+    "etcd_endpoints" : {{ etcd_endpoint }}
+}
