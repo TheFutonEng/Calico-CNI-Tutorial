@@ -1,0 +1,5 @@
+- name: Configure Calico networking for Calico Containers
+  hosts: calico_nodes
+  become: true
+  roles:
+    - role: calico-networking
