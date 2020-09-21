@@ -1,0 +1,25 @@
+---
+# tasks file for calico-networking
+- name: Get info on calico container
+  docker_container_info:
+    name: "{{ calico_container_name }}"
+  register: calico_inspection_data
+
+#- name: Print information about container 
+#  debug:
+#    var: calico_inspection_data["container"]["Id"]
+#  when: calico_inspection_data.exists
+
+- name: Add containers to the network 
+  command:
+    cmd: '{{ cnitool_location }}/cnitool add test-calico {{ calico_inspection_data["container"]["NetworkSettings"]["SandboxKey"] }}'
+  environment:
+    PATH: "{{ ansible_env.PATH }}:{{ GOROOT }}/bin"
+    GOROOT: "{{ GOROOT }}"
+    GOPATH: "{{ GOPATH }}"
+    CNI_CONTAINER_ID: '{{ calico_inspection_data["container"]["Id"] }}'
+  register: calico_container_add
+
+- name: Debug task to add calico container 
+  debug:
+    var: calico_container_add
