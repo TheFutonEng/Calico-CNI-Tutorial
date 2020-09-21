@@ -1,0 +1,5 @@
+- name: Put CNI configuration in place on the calico servers
+  hosts: calico_nodes
+  become: true
+  roles:
+    - role: cni-config
