@@ -47,6 +47,17 @@
     dest: /opt/cni/bin/calico-ipam
     mode: '0755'
 
+- name: Make soft link in the GOPATH for calico and calico-ipam
+  file:
+    src: "/opt/cni/bin/{{ item }}"
+    dest: "{{ cnitool_location }}/{{ item }}"
+    owner: root
+    group: root
+    state: link
+  with_items: 
+    - calico
+    - calico-ipam
+
 - name: Clone CNI repo 
   git:
     repo: https://github.com/containernetworking/cni.git
@@ -61,12 +72,6 @@
     PATH: "{{ ansible_env.PATH }}:{{ GOROOT }}/bin"
     GOROOT: "{{ GOROOT }}"
     GOPATH: "{{ GOPATH }}"
-  register: go_installation
-  # if this still doesn't work, this repo may be worth looking at more closely - https://github.com/fubarhouse/ansible-role-golang
-
-- debug:
-    var: go_installation
-    verbosity: 2
 
 - name: Clone network plugins repo 
   git:
@@ -78,7 +83,3 @@
     cmd: "{{ clone_location }}/plugins/build_linux.sh"
   environment: 
     PATH: "{{ ansible_env.PATH }}:{{ GOROOT }}/bin"
-  register: plugin_install
-
-- debug:
-    var: plugin_install
