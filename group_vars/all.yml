@@ -1,7 +1,8 @@
 # Project wide variables
 etcd_ip: '192.168.4.7'
-etcd_endpoint: "http://{{ etcd_ip }}:2379"
-cni_version: "0.4.0"
+etcd_endpoint: "http://192.168.4.7:2379"
+cni_version: 0.3.1
+cnitool_location: /home/vagrant/go/bin
 calico_version: release-v3.14
 calico_container_name: calico-{{ calico_version }}
 
