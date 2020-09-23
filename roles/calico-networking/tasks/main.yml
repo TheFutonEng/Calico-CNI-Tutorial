@@ -10,14 +10,15 @@
 #    var: calico_inspection_data["container"]["Id"]
 #  when: calico_inspection_data.exists
 
+# This long command is what got the containers joined:
+# sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cni/net.d CNI_CONTAINERID=$(contatin_id)  /home/vagrant/go/bin/cnitool add test-calico /var/run/docker/netns/default
 - name: Add containers to the network 
   command:
-    cmd: '{{ cnitool_location }}/cnitool add test-calico {{ calico_inspection_data["container"]["NetworkSettings"]["SandboxKey"] }}'
+    cmd: 'sudo CNI_PATH={{ GOPATH }}/bin NETCONFPATH={{ netconf_path }} CNI_CONTAINERID={{ calico_inspection_data["container"]["Id"] }} {{ cnitool_location }}/cnitool add test-calico {{ calico_inspection_data["container"]["NetworkSettings"]["SandboxKey"] }}'
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ GOROOT }}/bin"
     GOROOT: "{{ GOROOT }}"
     GOPATH: "{{ GOPATH }}"
-    CNI_CONTAINER_ID: '{{ calico_inspection_data["container"]["Id"] }}'
   register: calico_container_add
 
 - name: Debug task to add calico container 
