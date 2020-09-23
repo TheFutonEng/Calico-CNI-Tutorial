@@ -216,7 +216,7 @@ vagrant@calico1:~/go/bin$ sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cn
 
 Note the that address displayed in the IP section above was pulled out of the ippool that was created in the previous section.  Running the IP addr command directly on one of the Calico nodes now will show a new interface:
 
-```
+<pre>
 vagrant@calico1:~$ ip addr
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -244,14 +244,14 @@ vagrant@calico1:~$ ip addr
     link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff
     inet6 fe80::ecee:eeff:feee:eeee/64 scope link 
        valid_lft forever preferred_lft forever
-**8: eth0@calicnitool-573: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+<b>8: eth0@calicnitool-573: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
     link/ether 9a:24:70:ab:f8:eb brd ff:ff:ff:ff:ff:ff
     inet 10.1.127.192/32 scope global eth0
        valid_lft forever preferred_lft forever
     inet6 fe80::9824:70ff:feab:f8eb/64 scope link 
-       valid_lft forever preferred_lft forever**
+       valid_lft forever preferred_lft forever</b>
 vagrant@calico1:~$ 
-```
+</pre>
 
 # Additional Resources
 
