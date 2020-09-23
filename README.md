@@ -196,7 +196,7 @@ $ sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cni/net.d CNI_CONTAINERID=
 
 Example Output:
 ```
-vagrant@calico1:~/go/bin$ sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cni/net.d CNI_CONTAINERID=d4c5666d4fe74a5f298ffbc0ec31e1eb57726cef14f42211d44bd9d2fcabbe62  /home/vagrant/go/bin/cnitool add test-calico /var/run/docker/netns/default
+vagrant@calico1:~$ sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cni/net.d CNI_CONTAINERID=d4c5666d4fe74a5f298ffbc0ec31e1eb57726cef14f42211d44bd9d2fcabbe62  /home/vagrant/go/bin/cnitool add test-calico /var/run/docker/netns/default
 {
     "cniVersion": "0.3.1",
     "interfaces": [
@@ -211,14 +211,14 @@ vagrant@calico1:~/go/bin$ sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cn
         }
     ],
     "dns": {}
-}vagrant@calico1:~/go/bin$
+}vagrant@calico1:~$
 ```
 
 Note the that address displayed in the IP section above was pulled out of the ippool that was created in the previous section.  Running the IP addr command directly on one of the Calico nodes now will show a new interface:
 
 <pre>
 vagrant@calico1:~$ ip addr
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
