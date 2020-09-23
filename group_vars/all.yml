@@ -5,6 +5,7 @@ cni_version: 0.3.1
 cnitool_location: /home/vagrant/go/bin
 calico_version: release-v3.14
 calico_container_name: calico-{{ calico_version }}
+netconf_path: /etc/cni/net.d
 
 # Copying in the variables from fubarhouse
 GOPATH: /home/vagrant/go
