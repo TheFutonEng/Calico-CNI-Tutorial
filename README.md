@@ -244,7 +244,7 @@ vagrant@calico1:~$ ip addr
     link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff
     inet6 fe80::ecee:eeff:feee:eeee/64 scope link 
        valid_lft forever preferred_lft forever
-<b style='color:red'>8: eth0@calicnitool-573: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+<b style='color:red !important;'>8: eth0@calicnitool-573: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
     link/ether 9a:24:70:ab:f8:eb brd ff:ff:ff:ff:ff:ff
     inet 10.1.127.192/32 scope global eth0
        valid_lft forever preferred_lft forever
