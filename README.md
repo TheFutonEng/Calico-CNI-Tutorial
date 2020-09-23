@@ -224,27 +224,27 @@ vagrant@calico1:~$ ip addr
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host 
        valid_lft forever preferred_lft forever
-2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
     link/ether 02:df:14:00:a4:ed brd ff:ff:ff:ff:ff:ff
     inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
        valid_lft 46827sec preferred_lft 46827sec
     inet6 fe80::df:14ff:fe00:a4ed/64 scope link 
        valid_lft forever preferred_lft forever
-3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+3: enp0s8: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
     link/ether 08:00:27:3d:e7:68 brd ff:ff:ff:ff:ff:ff
     inet 192.168.4.5/24 brd 192.168.4.255 scope global enp0s8
        valid_lft forever preferred_lft forever
     inet6 fe80::a00:27ff:fe3d:e768/64 scope link 
        valid_lft forever preferred_lft forever
-4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+4: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default 
     link/ether 02:42:f0:1e:b2:9c brd ff:ff:ff:ff:ff:ff
     inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
        valid_lft forever preferred_lft forever
-7: calicnitool-573@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+7: calicnitool-573@eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
     link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff
     inet6 fe80::ecee:eeff:feee:eeee/64 scope link 
        valid_lft forever preferred_lft forever
-<b>8: eth0@calicnitool-573: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+<b>8: eth0@calicnitool-573: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
     link/ether 9a:24:70:ab:f8:eb brd ff:ff:ff:ff:ff:ff
     inet 10.1.127.192/32 scope global eth0
        valid_lft forever preferred_lft forever
