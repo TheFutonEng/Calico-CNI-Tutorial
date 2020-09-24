@@ -276,17 +276,25 @@ This is run from within the container on calico1 and is looking for the IP addre
 
 1. The route is actually for a /26 
 
-## Explanation
+### Explanation
 
 The reason for this has to do with the blockSize field set in the ippool that was created.  Straight from the [Calico website](https://docs.projectcalico.org/reference/resources/ippool):
 
 > "This allows addresses to be allocated in groups to workloads running on the same host. By grouping addresses, fewer routes need to be exchanged between hosts and to other BGP peers. If a host allocates all of the addresses in a block then it will be allocated an additional block. If there are no more blocks available then the host can take addresses from blocks allocated to other hosts. Specific routes are added for the borrowed addresses which has an impact on route table size."
 
 2. The next hop is the underlay address for calico2 out of underlay interface for calico1
+
+### Explanation
+
+This is at the very heart of how Calico behaves and is again best explained by [Calico's documentation](https://docs.projectcalico.org/reference/architecture/data-path).  In short, Calico helps containers route to where the workload is:
+
+> "In the Calico approach, IP packets to or from a workload are routed and firewalled by the Linux routing table and iptables infrastructure on the workload’s host. For a workload that is sending packets, Calico ensures that the host is always returned as the next hop MAC address regardless of whatever routing the workload itself might configure. For packets addressed to a workload, the last IP hop is that from the destination workload’s host to the workload itself."
+
 3. The protocol which programmed the route is bird
 
+### Explanation
 
-
+This observation is the logical conclusion of the first two points.  The reason it's "bird" in this repo is because that's what was set as the ```calico_backend``` variable in the calico-install Ansible role (exact location within this repo where that variable is defined is Calico-CNI-Tutorial/roles/calico-install/defaults/main.yml).  Bird uses BGP in order to exchange routes so this route was programmed by an actual dynamic routing protocol.  For additional 
 
 # Additional Resources
 
