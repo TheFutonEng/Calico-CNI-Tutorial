@@ -125,7 +125,7 @@ spec:
 
 This section covers getting the network plumbing in place for the calico containers.  Note, Calico only supports CNI spec versions 0.1.0, 0.2.0, 0.3.0 and 0.3.1 so if you've strayed from the repo (and that's ok!) be sure that your CNI configuration file leverages one of these versions.
 
-Make a note here or what interfaces are on the Calico nodes when running the ```ip addr``` command.  This will be referenced shortly.
+Make a mental note here on what interfaces are on the Calico nodes when running the ```ip addr``` command.  This will be referenced shortly.
 
 ```
 vagrant@calico1:~$ ip addr
@@ -214,7 +214,7 @@ vagrant@calico1:~$ sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cni/net.d
 }vagrant@calico1:~$
 ```
 
-Note the that address displayed in the IP section above was pulled out of the ippool that was created in the previous section.  Running the ```ip addr``` command directly on one of the Calico nodes now will show a new interface:
+Note the that address displayed in the ```ips``` section in the above output was pulled out of the ippool that was created in the previous section.  Running the ```ip addr``` command directly on one of the Calico nodes now will show a new interface:
 
 <pre>
 vagrant@calico1:~$ ip addr
@@ -259,10 +259,10 @@ Entering into the container shows a similar output:
 $ sudo docker exec -it calico-release-v3.14 /bin/bash
 ```
 
-From there, running the ```ip addr``` command on both containers produces similar output as above.  To continue with the following example, the IP addresses handed out for each containers are noted below:
+From there, running the ```ip addr``` command on both containers produces similar output as running the ```ip addr``` command on the VM directly.  To continue with the following example, the IP addresses handed out for each containers are noted below:
 
-calico1 - 10.1.127.192
-calico2 - 10.1.86.64
+* calico1 - 10.1.127.192
+* calico2 - 10.1.86.64
 
 The commmand that shows the path best here is shown below with it's output:
 
