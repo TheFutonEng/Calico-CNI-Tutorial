@@ -214,7 +214,7 @@ vagrant@calico1:~$ sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cni/net.d
 }vagrant@calico1:~$
 ```
 
-Note the that address displayed in the IP section above was pulled out of the ippool that was created in the previous section.  Running the IP addr command directly on one of the Calico nodes now will show a new interface:
+Note the that address displayed in the IP section above was pulled out of the ippool that was created in the previous section.  Running the ```ip addr``` command directly on one of the Calico nodes now will show a new interface:
 
 <pre>
 vagrant@calico1:~$ ip addr
@@ -253,6 +253,44 @@ vagrant@calico1:~$ ip addr
 vagrant@calico1:~$ 
 </pre>
 
+Entering into the container shows a similar output:
+
+```
+$ sudo docker exec -it calico-release-v3.14 /bin/bash
+```
+
+From there, running the ```ip addr``` command on both containers produces similar output as above.  To continue with the following example, the IP addresses handed out for each containers are noted below:
+
+calico1 - 10.1.127.192
+calico2 - 10.1.86.64
+
+The commmand that shows the path best here is shown below with it's output:
+
+```
+[root@calico1 /]# ip  route show | grep 10.1.86.64
+10.1.86.64/26 via 192.168.4.6 dev enp0s8 proto bird 
+[root@calico1 /]# 
+```
+
+This is run from within the container on calico1 and is looking for the IP address for calico2 in it's output.  There are a couple of things to notice here:
+
+1. The route is actually for a /26 
+
+## Explanation
+
+The reason for this has to do with the blockSize field set in the ippool that was created.  Straight from the [Calico website](https://docs.projectcalico.org/reference/resources/ippool):
+
+> "This allows addresses to be allocated in groups to workloads running on the same host. By grouping addresses, fewer routes need to be exchanged between hosts and to other BGP peers. If a host allocates all of the addresses in a block then it will be allocated an additional block. If there are no more blocks available then the host can take addresses from blocks allocated to other hosts. Specific routes are added for the borrowed addresses which has an impact on route table size."
+
+2. The next hop is the underlay address for calico2 out of underlay interface for calico1
+3. The protocol which programmed the route is bird
+
+
+
+
 # Additional Resources
 
 * [Kubernetes and the CNI](https://www.caseyc.net/cni-talk-kubecon-18.pdf)
+* [Linux VETH man page](https://man7.org/linux/man-pages/man4/veth.4.html)
+* [The Calico Data Path](https://docs.projectcalico.org/reference/architecture/data-path)
+* [Configure the Calico CNI Plugins](https://docs.projectcalico.org/reference/cni-plugin/configuration)
