@@ -17,7 +17,7 @@ TODO:Test with configurations to limit the amount of RAM Vagrant provides to eac
 For those unfamiliar with Vagrant, it is a product from Hashhicorp which allows for VMs or containers to be spun up and subsequently provisioned for the purposes of creating a lightweight and portable development environment.  The reason for listing Virtualbox above is that Vagrant by default uses Vitualbox as its hypervisor for spinning up resources.  Other tools can be used for this purpose but this repo was developed for Virtualbox.
 
 # Topology
-![alt test](https://github.com/TheFutonEng/Calico-CNI-Tutorial/raw/calico-cni-tutorial_topology.png "Calico CNI Tutorial Topology") 
+![Calico CNI Tutorial Topology](/images/calico-cni-tutorial_topology.png) 
 
 # Setup
 Once all of the above tools are installed on the target test system, clone the repo to the target test system:
