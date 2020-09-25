@@ -12,7 +12,7 @@ The tools in the below table are what are required to be installed on a laptop/c
 | Sufficient resource to run three VMs | N/A | N/A |
 | An Internet connetion | N/A | N/A |
 
-For those unfamiliar with Vagrant, it is a product from Hashhicorp which allows for VMs or containers to be spun up and subsequently provisioned for the purposes of creating a lightweight and portable development environment.  The reason for listing Virtualbox above is that Vagrant by default uses Vitualbox as its hypervisor for spinning up resources.  Other tools can be used for this purpose but this repo was developed for Virtualbox.
+For those unfamiliar with Vagrant, it is a product from HashhiCorp which allows for VMs or containers to be spun up and subsequently provisioned for the purposes of creating a lightweight and portable development environment.  The reason for listing Virtualbox above is that Vagrant by default uses Vitualbox as its hypervisor for spinning up resources.  Other tools can be used for this purpose but this repo was developed for Virtualbox.
 
 # Topology
 ![Calico CNI Tutorial Topology](/images/calico-cni-tutorial_topology.png) 
@@ -40,7 +40,7 @@ This command may take a few minutes to run but it does the following:
 * Downloads and installs the calico and calico-ipam CNI reference plugins on the calico nodes
 * Downloads and installs Golang on the calico nodes (role to perform this copied from fubarhouse [here](https://github.com/fubarhouse/ansible-role-golang))
 * Downloads and installs the CNI network plugins on the calico nodes
-* Downloads and install the cnitool on the calico nodes (install locaiton is /home/vagrant/go/bin/cnitool)
+* Downloads and installs the cnitool on the calico nodes (install locaiton is /home/vagrant/go/bin/cnitool)
 
 # Setup Verification
 
@@ -96,11 +96,11 @@ An IP Pool is a Calico resource type which represents an IP range from which Cal
 $ ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ippool.yml 
 ```
 
-### Manual IPPool Deployment
-
 This command will deploy the ippool defined in: 
 
 ```Calico-CNI-Tutorial/roles/ippool/templates/ippool.yml.j2```
+
+### Manual IPPool Deployment
 
 The equivalent command that can be run from the CLI of the etcd-node is below for reference:
 
@@ -261,13 +261,13 @@ vagrant@calico1:~$ ip addr
 vagrant@calico1:~$ 
 </pre>
 
-Entering into the container to produce the same output:
+Enter into the container to produce the same output:
 
 ```
 $ sudo docker exec -it calico-release-v3.14 /bin/bash
 ```
 
-After running the above command, you have the CLI of the calico container available.  From there, running the ```ip addr``` command on the containers should produce identical output as the output from the VM.  This is because the containers were launched with host network mode.  This means that the containers share the same network stack as the hosts on which they are running so all of the same interfaces from the host are available to the container.  
+After running the above command, you have the CLI of the calico container available.  From there, running the ```ip addr``` command on the containers should produce identical output as compared with the VM.  This is because the containers were launched with host network mode.  This means that the containers share the same network stack as the hosts on which they are running so all of the same interfaces from the host are available to the container.  
 
 To continue with this example, the IP addresses handed out for each containers in this particular run are noted below:
 
@@ -306,7 +306,7 @@ This is at the very heart of how Calico behaves and is again best explained by [
 
 #### Explanation
 
-This observation is the logical conclusion of the first two points.  The reason it's "bird" in this repo is because that's what was set as the ```calico_backend``` variable in the calico-install Ansible role (exact location within this repo where that variable is defined is Calico-CNI-Tutorial/roles/calico-install/defaults/main.yml).  Bird uses BGP in order to exchange routes so this route was programmed by an actual dynamic routing protocol.  For additional 
+This observation is the logical conclusion of the first two points.  The reason it's "bird" in this repo is because that's what was set as the ```calico_backend``` variable in the calico-install Ansible role (exact location within this repo where that variable is defined is Calico-CNI-Tutorial/roles/calico-install/defaults/main.yml).  Bird uses BGP in order to exchange routes so this route was programmed by an actual dynamic routing protocol.  
 
 # What's Next?
 
