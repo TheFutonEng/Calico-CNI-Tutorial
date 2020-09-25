@@ -310,9 +310,11 @@ This is at the very heart of how Calico behaves and is again best explained by [
 
 This observation is the logical conclusion of the first two points.  The reason it's "bird" in this repo is because that's what was set as the ```calico_backend``` variable in the calico-install Ansible role (exact location within this repo where that variable is defined is Calico-CNI-Tutorial/roles/calico-install/defaults/main.yml).  Bird uses BGP in order to exchange routes so this route was programmed by an actual dynamic routing protocol.  For additional 
 
+# What's Next?
+
+This guide is deliberately just trying to get your feet wet with Calico.  Additional exploration type tasks may be added to this repo at a later date.  To give you some ideas on what to try next, scope out [Calico the hard way](https://docs.projectcalico.org/getting-started/kubernetes/hardway/).  Note, this section of the Calico website focuses on Kubernetes which is fine.  If you're looking at Calico, there's a good chance you're interested in using it in the context of Kubernetes.
+
 # Additional Resources
 
-* [Kubernetes and the CNI](https://www.caseyc.net/cni-talk-kubecon-18.pdf)
-* [Linux VETH man page](https://man7.org/linux/man-pages/man4/veth.4.html)
 * [The Calico Data Path](https://docs.projectcalico.org/reference/architecture/data-path)
 * [Configure the Calico CNI Plugins](https://docs.projectcalico.org/reference/cni-plugin/configuration)
