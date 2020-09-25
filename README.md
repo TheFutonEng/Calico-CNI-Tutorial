@@ -263,13 +263,15 @@ vagrant@calico1:~$ ip addr
 vagrant@calico1:~$ 
 </pre>
 
-Entering into the container shows a similar output:
+Entering into the container to produce the same output:
 
 ```
 $ sudo docker exec -it calico-release-v3.14 /bin/bash
 ```
 
-From there, running the ```ip addr``` command on both containers produces similar output as running the ```ip addr``` command on the VM directly.  To continue with this example, the IP addresses handed out for each containers in this particular run are noted below:
+After running the above command, you have the CLI of the calico container available.  From there, running the ```ip addr``` command on the containers should produce identical output as the output from the VM.  This is because the containers were launched with host network mode.  This means that the containers share the same network stack as the hosts on which they are running so all of the same interfaces from the host are available to the container.  
+
+To continue with this example, the IP addresses handed out for each containers in this particular run are noted below:
 
 * calico1 - 10.1.127.192
 * calico2 - 10.1.86.64
