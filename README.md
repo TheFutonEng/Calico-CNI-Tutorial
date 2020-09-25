@@ -92,9 +92,13 @@ From this point, feel free to explore however you wish.  This repo will continue
 
 An IP Pool is a Calico resource type which represents an IP range from which Calico can assign individual addresses to endpoints.  In order to create a pool, run the following command from your localhost machine in the root directory of the repo (Calico-CNI-Tutorial/)
 
+### Automated IPPool Deployment
+
 ```bash
 $ ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ippool.yml 
 ```
+
+### Manual IPPool Deployment
 
 This command will deploy the ippool defined in: 
 
@@ -121,7 +125,7 @@ spec:
   blockSize: 26
 ```
 
-# Calico Configuration
+## Calico Configuration
 
 This section covers getting the network plumbing in place for the calico containers.  Note, Calico only supports CNI spec versions 0.1.0, 0.2.0, 0.3.0 and 0.3.1 so if you've strayed from the repo (and that's ok!) be sure that your CNI configuration file leverages one of these versions.
 
@@ -154,13 +158,17 @@ vagrant@calico1:~$ ip addr
 vagrant@calico1:~$
 ```
 
+### Automated Calico Networking Deployment
+
 The below command run from your laptop/desktop will plumb an interface into the docker containers running on the Calico nodes:
 
 ```
 $ ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory calico_networking.yml 
 ```
 
-To achieve this result manually, run the following on each Calico nodes:
+### Manual Calico Networking Deployement
+
+To achieve this result manually, run the following steps on each Calico node:
 
 1. Get the container id for the Calico container
 
@@ -214,6 +222,8 @@ vagrant@calico1:~$ sudo CNI_PATH=/home/vagrant/go/bin NETCONFPATH=/etc/cni/net.d
 }vagrant@calico1:~$
 ```
 
+### Explore What Just Happened
+
 Note the that address displayed in the ```ips``` section in the above output was pulled out of the ippool that was created in the previous section.  Running the ```ip addr``` command directly on one of the Calico nodes now will show a new interface:
 
 <pre>
@@ -259,7 +269,7 @@ Entering into the container shows a similar output:
 $ sudo docker exec -it calico-release-v3.14 /bin/bash
 ```
 
-From there, running the ```ip addr``` command on both containers produces similar output as running the ```ip addr``` command on the VM directly.  To continue with the following example, the IP addresses handed out for each containers are noted below:
+From there, running the ```ip addr``` command on both containers produces similar output as running the ```ip addr``` command on the VM directly.  To continue with this example, the IP addresses handed out for each containers in this particular run are noted below:
 
 * calico1 - 10.1.127.192
 * calico2 - 10.1.86.64
@@ -267,24 +277,26 @@ From there, running the ```ip addr``` command on both containers produces simila
 The commmand that shows the path best here is shown below with it's output:
 
 ```
-[root@calico1 /]# ip  route show | grep 10.1.86.64
+[root@calico1 /]# ip route show | grep 10.1.86.64
 10.1.86.64/26 via 192.168.4.6 dev enp0s8 proto bird 
 [root@calico1 /]# 
 ```
 
 This is run from within the container on calico1 and is looking for the IP address for calico2 in it's output.  There are a couple of things to notice here:
 
-1. The route is actually for a /26 
+1. The route is actually for a /26 and not a host route
 
-### Explanation
+#### Explanation
 
 The reason for this has to do with the blockSize field set in the ippool that was created.  Straight from the [Calico website](https://docs.projectcalico.org/reference/resources/ippool):
 
 > "This allows addresses to be allocated in groups to workloads running on the same host. By grouping addresses, fewer routes need to be exchanged between hosts and to other BGP peers. If a host allocates all of the addresses in a block then it will be allocated an additional block. If there are no more blocks available then the host can take addresses from blocks allocated to other hosts. Specific routes are added for the borrowed addresses which has an impact on route table size."
 
-2. The next hop is the underlay address for calico2 out of underlay interface for calico1
+What happens if another container is spun up and plumbed on either Calico node?  Give it a shot.
 
-### Explanation
+2. The next hop is the underlay address for calico2 (192.168.4.6) out of underlay interface for calico1 (enp0s8)
+
+#### Explanation
 
 This is at the very heart of how Calico behaves and is again best explained by [Calico's documentation](https://docs.projectcalico.org/reference/architecture/data-path).  In short, Calico helps containers route to where the workload is:
 
@@ -292,7 +304,7 @@ This is at the very heart of how Calico behaves and is again best explained by [
 
 3. The protocol which programmed the route is bird
 
-### Explanation
+#### Explanation
 
 This observation is the logical conclusion of the first two points.  The reason it's "bird" in this repo is because that's what was set as the ```calico_backend``` variable in the calico-install Ansible role (exact location within this repo where that variable is defined is Calico-CNI-Tutorial/roles/calico-install/defaults/main.yml).  Bird uses BGP in order to exchange routes so this route was programmed by an actual dynamic routing protocol.  For additional 
 
