@@ -9,10 +9,12 @@ The tools in the below table are what are required to be installed on a laptop/c
 | Vagrant   | 2.2.10  | [link](https://www.vagrantup.com/docs/installation) |
 | Ansible   | 2.9     | [link](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) |
 | Virtualbox| 6.1.12  | [link](https://www.virtualbox.org/manual/ch02.html) |
+| KVM       | 4.2.1   | [link](https://www.linux-kvm.org/page/RunningKVM)   |
 | Sufficient resource to run three VMs | N/A | N/A |
 | An Internet connetion | N/A | N/A |
 
-For those unfamiliar with Vagrant, it is a product from HashhiCorp which allows for VMs or containers to be spun up and subsequently provisioned for the purposes of creating a lightweight and portable development environment.  The reason for listing Virtualbox above is that Vagrant by default uses Vitualbox as its hypervisor for spinning up resources.  Other tools can be used for this purpose but this repo was developed for Virtualbox.
+For those unfamiliar with Vagrant, it is a product from HashhiCorp which allows for VMs or containers to be spun up and subsequently provisioned for the purposes of creating a lightweight and portable development environment.  The reason for listing Virtualbox above is that Vagrant by default uses Vitualbox as its hypervisor for spinning up resources.  Other tools can be used for this purpose but this repo was developed for Virtualbox on a Mac.  Additional testing was done via KVM on an Ubuntu 20.04 system.  This setup requires that the Vagrant libvirt provider be installed in order for VMs to be properly spun up.  [The Vagrant documentation to install the libvirt plugin](https://www.vagrantup.com/docs/plugins/usage) did not work on this Ubuntu system.  After scowering the internet, all that was needed was to install the plugin via apt.  Your mileage may vary.
+
 
 # Topology
 ![Calico CNI Tutorial Topology](/images/calico-cni-tutorial_topology.png) 
@@ -135,22 +137,20 @@ vagrant@calico1:~$ ip addr
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 52:54:00:44:59:a7 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.121.7/24 brd 192.168.121.255 scope global dynamic eth0
+       valid_lft 2768sec preferred_lft 2768sec
+    inet6 fe80::5054:ff:fe44:59a7/64 scope link 
        valid_lft forever preferred_lft forever
-2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-    link/ether 02:df:14:00:a4:ed brd ff:ff:ff:ff:ff:ff
-    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
-       valid_lft 80134sec preferred_lft 80134sec
-    inet6 fe80::df:14ff:fe00:a4ed/64 scope link 
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 52:54:00:31:ef:20 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.4.5/24 brd 192.168.4.255 scope global eth1
        valid_lft forever preferred_lft forever
-3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-    link/ether 08:00:27:ad:b1:52 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.4.5/24 brd 192.168.4.255 scope global enp0s8
-       valid_lft forever preferred_lft forever
-    inet6 fe80::a00:27ff:fead:b152/64 scope link 
+    inet6 fe80::5054:ff:fe31:ef20/64 scope link 
        valid_lft forever preferred_lft forever
 4: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
-    link/ether 02:42:f5:98:0a:06 brd ff:ff:ff:ff:ff:ff
+    link/ether 02:42:6a:b6:d4:b4 brd ff:ff:ff:ff:ff:ff
     inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
        valid_lft forever preferred_lft forever
 vagrant@calico1:~$
