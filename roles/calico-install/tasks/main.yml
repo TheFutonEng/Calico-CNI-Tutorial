@@ -21,7 +21,7 @@
       - /var/run/calico:/var/run/calico
       - /var/lib/calico:/var/lib/calico
     env:
-      IP: "{{ hostvars[inventory_hostname]['ansible_enp0s8']['ipv4']['address'] }}"
+      IP: "{{ hostvars[inventory_hostname]['ansible_eth1']['ipv4']['address'] }}"
       CALICO_NETWORKING_BACKEND: "{{ calico_backend }}"
       NO_DEFAULT_POOLS: "true"
       CALICO_LIBNETWORK_ENABLED: "false"
